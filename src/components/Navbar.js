@@ -87,16 +87,7 @@ const Category = styled.div`
     cursor: pointer;
     width: 100%;
 `;
-const CategoClick = styled.div`
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 100%;
-    border-bottom: 2px #5ECE7B solid;
-    opacity: 0.8;
-`;
+
 const Container = styled.div`
     width: 80%;
     display: flex;
