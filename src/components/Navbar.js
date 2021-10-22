@@ -4,33 +4,30 @@ import Brand from "../assets/Brand.png";
 import vector from "../assets/Vector.png";
 import vector2 from "../assets/Vector-2.png";
 
-
 export default class Navbar extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
-             isLight : false
+             women : false,
+             men : false,
+             kids : false,
         }
         this.toggler = this.toggler.bind(this)
     }
-    toggler = () => {
-        this.setState(
-            prev => ({
-                isLight : !prev.isLight
-            })
-        );
+    toggler = (x) => {
+            this.setState(prev => ({x : !prev.x}))         
     }
     
     render() {
-        const Style = {color : "#5ECE7B", borderBottom : "2px #5ECE7B solid"}
+        const Style = {color : "#5ECE7B", borderBottom : "2px #5ECE7B solid"};
         return(
             <NavBar>
                 <Container>
                     <Categories>
-                        <Category onClick={this.toggler} style={this.state.isLight ? Style : null} ><Title>WOMEN</Title></Category>
-                        <Category><Title>MEN</Title></Category>
-                        <Category><Title>KIDS</Title></Category>
+                        <Category onClick={() => this.toggler("women")} style={this.state.women ? Style : null} ><Title>WOMEN</Title></Category>
+                        <Category onClick={() => this.toggler("men")} style={this.state.men ? Style : null}><Title>MEN</Title></Category>
+                        <Category onClick={() => this.toggler("kids")} style={this.state.kids ? Style : null}><Title>KIDS</Title></Category>
                     </Categories>
                     <CartBtn>
                         <img src = {Brand} alt = "Brand Icon"/>
