@@ -5,18 +5,6 @@ import vector from "../assets/Vector.png";
 import vector2 from "../assets/Vector-2.png";
 
 export default class Navbar extends Component {
-    
-    constructor(props) {
-        super(props)
-    
-        this.state = {}
-        
-    }
-    
-    handleClick = () => {
-        this.props.Toggler()
-    }
-    
     render() {
         const Style = {color : "#5ECE7B", borderBottom : "2px #5ECE7B solid"};    
         return(
