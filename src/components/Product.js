@@ -5,14 +5,58 @@ export default class Product extends Component {
 
     render(){
         return(
-            <Container>
+            <Container style={{opacity : this.props.stock ? "" : "0.5"}}>
+                {this.props.stock ? null : <Stock>out of stock</Stock>}
+                <Image src={this.props.src} alt = "Product"  />
                 
-                <Title>{this.props.title}</Title>
+                <Content>
+                    <Title>{this.props.title}</Title>
+                    <Price>{`${this.props.price} ${this.props.currency}`}</Price>
+                </Content>
             </Container>
         )
     }
 }
 
+const Stock = styled.h1`
+    position: absolute;
+    left: 25.42%;
+    right: 25.71%;
+    top: 34.24%;
+    bottom: 43.94%;
+    font-size: 24px;
+    line-height: 160%;
+`;
+const Container = styled.div`
+    height: 386px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+    &:hover {
+        box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+    }
+`;
+const Title = styled.h3`
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 160%;
+`;
+const Image = styled.img`
+    width: 95%;
+    height: 80%;
+    margin: auto;
+    
+`;
 
-const Container = styled.div``;
-const Title = styled.h3``;
+const Price = styled.p`
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 160%;
+`;
+const Content = styled.div`
+    height: 20%;
+`;

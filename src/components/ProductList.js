@@ -6,10 +6,30 @@ export default class ProductList extends Component {
  
     render() {
         return(
-            <Container>
-                {this.props.Data.products.map(p =>  <Product key = {p.id} title = {p.name}/>)}
-            </Container>
+            <div style={{paddingTop : "40px"}}>
+                <Title>{this.props.Data.name}</Title>
+                    <Container>
+                        {this.props.Data.products.map(p =>  <Product stock = {p.inStock}  id = {p.id} key = {p.id} title = {p.name} src = {p.gallery[0]} price = {p.prices[0].amount} currency = {p.prices[0].currency}/>)}
+                    </Container>
+            </div>
         )
     }
 }
-const Container = styled.div``;
+const Container = styled.div`
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: auto;
+`;
+
+const Title = styled.h1`
+    font-weight: normal;
+    font-size: 42px;
+    line-height: 160%;
+    width: 80%;
+    margin: auto;
+    text-transform: uppercase;
+`;
