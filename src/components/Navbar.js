@@ -5,26 +5,29 @@ import vector from "../assets/Vector.png";
 import vector2 from "../assets/Vector-2.png";
 
 export default class Navbar extends Component {
+    
     constructor(props) {
         super(props)
     
         this.state = {
-             women : false,
-             men : false,
-             kids : false,
+             
         }
-        this.toggler = this.toggler.bind(this)
+        this.toggler = this.toggler.bind(this);
+        
     }
+    
     toggler = (x) => {
             this.setState(prev => ({x : !prev.x}))         
     }
     
     render() {
-        const Style = {color : "#5ECE7B", borderBottom : "2px #5ECE7B solid"};
+        const Style = {color : "#5ECE7B", borderBottom : "2px #5ECE7B solid"};    
+        console.log(this.props.Data[0])
         return(
             <NavBar>
                 <Container>
                     <Categories>
+
                         <Category onClick={() => this.toggler("women")} style={this.state.women ? Style : null} ><Title>WOMEN</Title></Category>
                         <Category onClick={() => this.toggler("men")} style={this.state.men ? Style : null}><Title>MEN</Title></Category>
                         <Category onClick={() => this.toggler("kids")} style={this.state.kids ? Style : null}><Title>KIDS</Title></Category>

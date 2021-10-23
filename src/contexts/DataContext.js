@@ -37,16 +37,15 @@ export default function DataContextProvider(props) {
 }
   `;
 
-  const { error, loading, data } = useQuery(DATA);
-  const [users, setUsers] = useState();
+  const { data, loading, error } = useQuery(DATA);
+  const [infos, setInfos] = useState();
+
   useEffect(() => {
-    if (data) {
-      setUsers(data.data);
-      console.log(data)
-    }
-  }, [data]);
+      setInfos(data)
+  },[data]);
   return (
-    <DataContext.Provider value={users}>
+    
+    <DataContext.Provider value={{infos, loading, error}}>
       {props.children}
     </DataContext.Provider>
   )

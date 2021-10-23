@@ -9,7 +9,6 @@ import DataContextProvider from './contexts/DataContext';
 
 
 const client = new ApolloClient({
-  
   uri : "http://localhost:4000/",
   cache : new InMemoryCache(),
 
