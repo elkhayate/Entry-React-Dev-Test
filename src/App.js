@@ -4,11 +4,17 @@ import { DataContext } from './contexts/DataContext';
 
 export default function App() {
   const {infos, loading, error} = useContext(DataContext);
-  const [data, setData] = useState()
+  const [data, setData] = useState();
+  const [togg, setTogg] = useState(true);
   useEffect(()=>{
     setData(infos)
-  },[loading,infos])
-
+  },[loading, infos, togg])
+  
+  const toggler = () => {
+    setTogg(!togg)
+  }
+    
+    
   if(loading){
     return <p>Loading...</p>
   }else if(!loading){
@@ -16,7 +22,7 @@ export default function App() {
     console.log(data)
     if(data){
       return (
-        <Navbar Data={data.categories}/>
+        <Navbar Categories={data.categories} Currencies={data.currencies} Toggler = {toggler}  Togg = {togg}/>
       )
     }
     console.log(error)

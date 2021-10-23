@@ -44,7 +44,6 @@ export default function DataContextProvider(props) {
       setInfos(data)
   },[data]);
   return (
-    
     <DataContext.Provider value={{infos, loading, error}}>
       {props.children}
     </DataContext.Provider>

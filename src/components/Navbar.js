@@ -9,28 +9,22 @@ export default class Navbar extends Component {
     constructor(props) {
         super(props)
     
-        this.state = {
-             
-        }
-        this.toggler = this.toggler.bind(this);
+        this.state = {}
         
     }
     
-    toggler = (x) => {
-            this.setState(prev => ({x : !prev.x}))         
+    handleClick = () => {
+        this.props.Toggler()
     }
     
     render() {
         const Style = {color : "#5ECE7B", borderBottom : "2px #5ECE7B solid"};    
-        console.log(this.props.Data[0])
         return(
             <NavBar>
                 <Container>
                     <Categories>
-
-                        <Category onClick={() => this.toggler("women")} style={this.state.women ? Style : null} ><Title>WOMEN</Title></Category>
-                        <Category onClick={() => this.toggler("men")} style={this.state.men ? Style : null}><Title>MEN</Title></Category>
-                        <Category onClick={() => this.toggler("kids")} style={this.state.kids ? Style : null}><Title>KIDS</Title></Category>
+                        <Category style={this.props.Togg ? Style : null} onClick={()=> this.props.Toggler()}><Title>{this.props.Categories[0].name}</Title></Category>
+                        <Category style={this.props.Togg ? null : Style} onClick={()=> this.props.Toggler()}><Title>{this.props.Categories[1].name}</Title></Category>
                     </Categories>
                     <CartBtn>
                         <img src = {Brand} alt = "Brand Icon"/>
@@ -54,6 +48,7 @@ const Title = styled.h1`
     line-height: 120%;
     margin: 30%;
     padding: 10px;
+    text-transform: uppercase;
 `;
 
 
