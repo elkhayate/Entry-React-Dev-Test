@@ -5,11 +5,10 @@ export default class Product extends Component {
 
     render(){
         return(
-            <Container style={{opacity : this.props.stock ? "" : "0.5"}}>
+            <Container onClick={() => this.props.Handle(this.props.id)} style={{opacity : this.props.stock ? "" : "0.5"}}>
                 {this.props.stock ? null : <Stock>out of stock</Stock>}
                 {this.props.sold && <Sold src={sold} alt = "Sold item" />}
                 <Image src={this.props.src} alt = "Product"  />
-                
                 <Content>
                     <Title>{this.props.title}</Title>
                     <Price>{`${this.props.price} ${this.props.currency}`}</Price>

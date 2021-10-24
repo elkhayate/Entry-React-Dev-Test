@@ -9,7 +9,7 @@ export default class ProductList extends Component {
             <div style={{paddingTop : "40px"}}>
                 <Title>{this.props.Data.name}</Title>
                     <Container>
-                        {this.props.Data.products.map(p =>  <Product stock = {p.inStock}  id = {p.id} key = {p.id} title = {p.name} src = {p.gallery[0]} price = {p.prices[0].amount} currency = {p.prices[0].currency}/>)}
+                        {this.props.Data.products.map(p =>  <Product Handle = {this.props.Handle(p.id)} stock = {p.inStock}  id = {p.id} key = {p.id} title = {p.name} src = {p.gallery[0]} price = {p.prices[0].amount} currency = {p.prices[0].currency}/>)}
                     </Container>
             </div>
         )
