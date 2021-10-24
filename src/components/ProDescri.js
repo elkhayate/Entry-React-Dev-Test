@@ -4,7 +4,17 @@ import styled from 'styled-components';
 
 
 export default class ProDescri extends Component {
+    constructor(props) {
+        super(props)
     
+        this.state = {}
+    }
+    handleClick = (data) => {
+        this.setState({
+            value : data
+        });
+        this.props.Add(this.state.data)
+    }
     render(){
         const item = this.props.Data;
         const Gall = item.gallery
@@ -12,7 +22,7 @@ export default class ProDescri extends Component {
             <Container>
                <Images>
                     <Choices>
-                        {Gall.map(i => <img style={{height:"100px"}} src={i} alt ="product" />)}
+                        {Gall.map(i => <img key={i} style={{height:"100px"}} src={i} alt ="product" />)}
                     </Choices>
                     <Image src={Gall[0]} />
                </Images>
@@ -20,9 +30,14 @@ export default class ProDescri extends Component {
                    <Title>
                         {item.name}
                    </Title>
+                   {item.attributes[0] && 
                    <Attributes>
-                       
-                    </Attributes>   
+                   <h2>{item.attributes[0].name} :</h2>
+                   <Choicees>
+                       {item.attributes[0].items.map(i => item.attributes[0].type === "swatch" ? <Choice style={{opacity : this.state.value === i.value ? "0.6" : ""}} key={i.id}  onClick={()=>{this.handleClick(i.value)}} style={{background : i.value}} /> : <Choice style={{opacity : this.state.value === i.value ? "0.6" : ""}} key={i.id} onClick={()=>{this.handleClick(i.value)}}>{i.value}</Choice>)}
+                   </Choicees>
+                </Attributes>  
+                   } 
                     <Price>
                         <h2>Price :</h2>
                         <h2>{`${item.prices[0].amount} ${item.prices[0].currency}`}</h2>
@@ -30,9 +45,9 @@ export default class ProDescri extends Component {
 
                     <Button>add to cart</Button>
 
-                   <Descri>
-                    <td dangerouslySetInnerHTML={{__html: item.description}} />
-                   </Descri>
+                  
+                    <Descri  dangerouslySetInnerHTML={{__html: item.description}} />
+                 
                             
                     
 
@@ -41,6 +56,31 @@ export default class ProDescri extends Component {
         )
     }
 }
+const Choicees = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+`;
+
+const Choice = styled.div`
+    border: 1px solid #A6A6A6;
+    box-sizing: border-box;
+    width: 63px;
+    height: 45px;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin: 10px;
+    cursor: pointer;
+    &:hover{
+        opacity: 0.5;
+    }
+`;
+
 const Title = styled.h1``;
 const Attributes = styled.div``;
 const Price = styled.div``;
@@ -63,7 +103,7 @@ const Button = styled.button`
         opacity: 0.6;
     }
 `;
-const Descri = styled.div``;
+
 
 const Container = styled.div`
     width: 80%;
@@ -89,4 +129,7 @@ const Image = styled.img`
 `;
 const Content = styled.div`
     width : 40%;
+`;
+const Descri = styled.div`
+    margin-top: 60px;
 `;
