@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import styled from "styled-components";
-
+import sold from "../assets/Sold_icon.png"
 export default class Product extends Component {
 
     render(){
         return(
             <Container style={{opacity : this.props.stock ? "" : "0.5"}}>
                 {this.props.stock ? null : <Stock>out of stock</Stock>}
+                {this.props.sold && <Sold src={sold} alt = "Sold item" />}
                 <Image src={this.props.src} alt = "Product"  />
                 
                 <Content>
@@ -18,6 +19,14 @@ export default class Product extends Component {
     }
 }
 
+const Sold = styled.img`
+    position: absolute;
+    display: flex;
+    align-self: flex-end;
+    bottom: 50px;
+    right: 25px;
+`;
+
 const Stock = styled.h1`
     position: absolute;
     left: 25.42%;
@@ -26,6 +35,7 @@ const Stock = styled.h1`
     bottom: 43.94%;
     font-size: 24px;
     line-height: 160%;
+    text-transform: uppercase;
 `;
 const Container = styled.div`
     height: 386px;
@@ -34,7 +44,7 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     cursor: pointer;
-    padding: 10px;
+    padding: 15px;
     position: relative;
     &:hover {
         box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);

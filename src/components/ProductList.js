@@ -16,9 +16,9 @@ export default class ProductList extends Component {
     }
 }
 const Container = styled.div`
-    width: 80%;
+    width: 83%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-content: center;
     align-items: center;
     flex-wrap: wrap;
