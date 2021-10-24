@@ -7,7 +7,9 @@ export default class ProDescri extends Component {
     constructor(props) {
         super(props)
     
-        this.state = {}
+        this.state = {
+            image : this.props.Data.gallery[0]
+        }
     }
     handleClick = (data) => {
         this.setState({
@@ -17,6 +19,11 @@ export default class ProDescri extends Component {
     handleButton = () => {
         this.props.Add()
     }
+    switchImage = (val) => {
+        this.setState({
+            image : val
+        })
+    }
     render(){
         const item = this.props.Data;
         const Gall = item.gallery
@@ -24,9 +31,9 @@ export default class ProDescri extends Component {
             <Container>
                <Images>
                     <Choices>
-                        {Gall.map(i => <img key={i} style={{height:"100px"}} src={i} alt ="product" />)}
+                        {Gall.map(i => <img onClick={() => this.switchImage(i)} key={i} style={{height:"100px", cursor : "pointer"}} src={i} alt ="product" />)}
                     </Choices>
-                    <Image src={Gall[0]} />
+                    <Image src={this.state.image} />
                </Images>
                <Content>
                    <Title>

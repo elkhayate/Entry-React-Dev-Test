@@ -26,7 +26,12 @@ export default function App() {
     setShow(true)
   }
   const handleAdd = () => {
-    setItemsSold(old=> [...old, descri[0]])
+    if(!itemsSold.includes(descri[0])){
+      setItemsSold(old=> [...old, descri[0]])
+    }else{
+      return null
+    }
+    
   } 
   if(loading){
     return <p>Loading...</p>
