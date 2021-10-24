@@ -9,24 +9,25 @@ export default function App() {
   const [togg, setTogg] = useState(true);
   const [show, setShow] = useState(false);
   const [descri, setDescri] = useState();
-  const [itemsSold, setItemsSold] = useState();
+  const [itemsSold, setItemsSold] = useState([]);
 
   useEffect(()=>{
     setData(infos)
   },[loading, infos, togg])
   
-  const toggler = (didi) => {
-    setTogg(didi)
+  const toggler = (val) => {
+    setTogg(val)
     setShow(false)
   }
-  const handleAdd = (item) => {
-    setItemsSold(old => [...old, item]);
-  } 
+  
   const handleShow=(id)=>{
     const item = togg ? infos.categories[0].products.filter(p => p.id === id) : infos.categories[1].products.filter(p => p.id === id);
     setDescri(item)
     setShow(true)
   }
+  const handleAdd = () => {
+    setItemsSold(old=> [...old, descri[0]])
+  } 
   if(loading){
     return <p>Loading...</p>
   }else if(!loading){
@@ -36,7 +37,7 @@ export default function App() {
       return (
         <>
         <Navbar Categories={data.categories} Currencies={data.currencies} Toggler = {toggler}  Togg = {togg}/>
-        {show ? <ProDescri Data = {descri[0]} Add = {() => handleAdd} /> : <ProductList Handle = {() => handleShow}  Data={togg ? data.categories[0] : data.categories[1]}/>}
+        {show ? <ProDescri Data = {descri[0]} Add = {() => handleAdd()} /> : <ProductList Handle = {() => handleShow}  Data={togg ? data.categories[0] : data.categories[1]}/>}
         </>
       )
     }

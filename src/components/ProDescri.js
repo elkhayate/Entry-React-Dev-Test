@@ -13,7 +13,9 @@ export default class ProDescri extends Component {
         this.setState({
             value : data
         });
-        this.props.Add(this.state.data)
+    }
+    handleButton = () => {
+        this.props.Add()
     }
     render(){
         const item = this.props.Data;
@@ -34,7 +36,7 @@ export default class ProDescri extends Component {
                    <Attributes>
                    <h2>{item.attributes[0].name} :</h2>
                    <Choicees>
-                       {item.attributes[0].items.map(i => item.attributes[0].type === "swatch" ? <Choice style={{opacity : this.state.value === i.value ? "0.6" : ""}} key={i.id}  onClick={()=>{this.handleClick(i.value)}} style={{background : i.value}} /> : <Choice style={{opacity : this.state.value === i.value ? "0.6" : ""}} key={i.id} onClick={()=>{this.handleClick(i.value)}}>{i.value}</Choice>)}
+                       {item.attributes[0].items.map(i => item.attributes[0].type === "swatch" ? <Choice style={{opacity : this.state.value === i.value ? "0.6" : "", background : i.value}} key={i.id}  onClick={()=>{this.handleClick(i.value)}} /> : <Choice style={{opacity : this.state.value === i.value ? "0.2" : ""}} key={i.id} onClick={()=>{this.handleClick(i.value)}}>{i.value}</Choice>)}
                    </Choicees>
                 </Attributes>  
                    } 
@@ -43,7 +45,7 @@ export default class ProDescri extends Component {
                         <h2>{`${item.prices[0].amount} ${item.prices[0].currency}`}</h2>
                     </Price> 
 
-                    <Button>add to cart</Button>
+                    <Button onClick={()=>this.handleButton()}>add to cart</Button>
 
                   
                     <Descri  dangerouslySetInnerHTML={{__html: item.description}} />
