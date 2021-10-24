@@ -14,8 +14,8 @@ export default function App() {
     setData(infos)
   },[loading, infos, togg])
   
-  const toggler = () => {
-    setTogg(!togg)
+  const toggler = (didi) => {
+    setTogg(didi)
     setShow(false)
   }
     
@@ -33,7 +33,7 @@ export default function App() {
       return (
         <>
         <Navbar Categories={data.categories} Currencies={data.currencies} Toggler = {toggler}  Togg = {togg}/>
-        {show ? <ProDescri Title = {descri[0].name} id = {descri[0].id} /> : <ProductList Handle = {() => handleShow}  Data={togg ? data.categories[0] : data.categories[1]}/>}
+        {show ? <ProDescri Data = {descri[0]}  /> : <ProductList Handle = {() => handleShow}  Data={togg ? data.categories[0] : data.categories[1]}/>}
         </>
       )
     }

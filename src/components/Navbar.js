@@ -11,8 +11,8 @@ export default class Navbar extends Component {
             <NavBar>
                 <Container>
                     <Categories>
-                        <Category style={this.props.Togg ? Style : null} onClick={()=> this.props.Toggler()}><Title>{this.props.Categories[0].name}</Title></Category>
-                        <Category style={this.props.Togg ? null : Style} onClick={()=> this.props.Toggler()}><Title>{this.props.Categories[1].name}</Title></Category>
+                        <Category style={this.props.Togg ? Style : null} onClick={()=> this.props.Toggler(true)}><Title>{this.props.Categories[0].name}</Title></Category>
+                        <Category style={this.props.Togg ? null : Style} onClick={()=> this.props.Toggler(false)}><Title>{this.props.Categories[1].name}</Title></Category>
                     </Categories>
                     <CartBtn>
                         <img src = {Brand} alt = "Brand Icon"/>
