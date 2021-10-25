@@ -12,6 +12,7 @@ export default class ProDescri extends Component {
             Data : this.props.Data,
             choicesList : [],
         }
+        this.handleButton = this.handleButton.bind(this)
     }
     handleClick = (attr, val) => {
         let newItem = {name : attr.id, Val : val};
@@ -24,12 +25,12 @@ export default class ProDescri extends Component {
                 choicesList : [...this.state.choicesList, newItem]
             })
         }
-        
+        return null
 
     }
     handleButton = () => {
-        const Item = [this.state.swatch, this.state.Test];
-        this.props.Add(Item)
+        this.props.Addd(this.state.choicesList)
+        this.setState({choicesList : []})
     }
     switchImage = (val) => {
         this.setState({
@@ -52,7 +53,6 @@ export default class ProDescri extends Component {
                         {item.name}
                    </Title>
                  {item.attributes && 
-                   
                     item.attributes.map(attri => 
                      <Attributes key={attri.id}>
                          <h2>{attri.name} :</h2>
@@ -62,15 +62,11 @@ export default class ProDescri extends Component {
                      </Attributes>
                      )
                 }
-                 
                     <Price>
                         <h2>Price :</h2>
                         <h2>{`${item.prices[0].amount} ${item.prices[0].currency}`}</h2>
                     </Price> 
-
-                    <Button onClick={()=>this.handleButton()}>add to cart</Button>
-
-                  
+                    <Button style={{opacity : item.inStock ? "" : "0.2"}} disabled={!item.inStock} onClick={() => this.handleButton()}>add to cart</Button>
                     <Descri  dangerouslySetInnerHTML={{__html: item.description}} />
                  
                             

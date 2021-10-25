@@ -28,24 +28,22 @@ export default function App() {
     setShow(true)
   }
   const handleAdd = (item) => {
-    if(!itemsSold.includes(descri[0])){
-      var Item = [descri[0],item]
-      setItemsSold(old=> [...old, Item])
-    }else{
-      return null
+    const Item = [descri[0] , item]
+    if(itemsSold.some(t => t[0] === descri[0])){
+      setItemsSold([...itemsSold.filter(t => t[0] !== descri[0]), Item])
+    }else {
+      setItemsSold([...itemsSold, Item])
     }
-    
   } 
   if(loading){
     return <p>Loading...</p>
   }else if(!loading){
      
-    console.log(data)
     if(data){
       return (
         <>
         <Navbar Categories={data.categories} Currencies={data.currencies} Toggler = {toggler}  Togg = {togg}/>
-        {show ? <ProDescri Data = {descri[0]} Add = {() => handleAdd()} /> : <ProductList Handle = {() => handleShow}  Data={togg ? data.categories[0] : data.categories[1]}/>}
+        {show ? <ProDescri Data = {descri[0]} Addd = {handleAdd} /> : <ProductList Handle = {() => handleShow}  Data={togg ? data.categories[0] : data.categories[1]}/>}
         </>
       )
     }
