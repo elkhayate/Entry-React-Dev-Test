@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Brand from "../assets/Brand.png";
 import vector from "../assets/Vector.png";
 import vector2 from "../assets/Vector-2.png";
+import CartItem from "./cartItem";
 
 export default class Navbar extends Component {
     constructor(props) {
@@ -10,7 +11,7 @@ export default class Navbar extends Component {
     
         this.state = {
             showCurrencies : false,
-            showCart : false,
+            showCart : true,
         }
     }
     render() {
@@ -30,7 +31,7 @@ export default class Navbar extends Component {
                                 <Usd>$</Usd>
                                 <img style={{height:"100%"}} src={vector2} alt = "DropDown" />
                         </Currencies>
-                        <Parent >
+                        <Parent onClick={()=>this.setState({showCart : !this.state.showCart})}>
                             {this.props.Sold[0] && <Test>{this.props.Sold.length}</Test>}
                         <img  src={vector} alt="Purchases" />
                         </Parent>
@@ -41,10 +42,35 @@ export default class Navbar extends Component {
                     {this.props.Currencies.map(t => <Choice key={t} onClick={()=> {this.props.addCurrency(t); this.setState({showCurrencies : false})}}>{t}</Choice>)}
                 </Choices>
                 }
+                {this.state.showCart &&
+                    <DropDown>
+                        <Titl>My Bag. {this.props.Sold.length} items</Titl>
+                        {this.props.Sold.map(p => <CartItem key={p[0].id} Curr={this.props.Curr} title = {p[0].name} price={p[0].prices} attr = {p[1]} image = {p[0].gallery} />)}
+                    </DropDown>
+                }
             </NavBar>
         )
     }
 }
+const Titl = styled.h2`
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 160%;
+    text-align: right;
+    color: #1D1F22;
+    text-align: start;
+    padding: 5px;
+`;
+
+const DropDown = styled.div`
+    position: absolute;
+    width : 325px;
+    background-color: aqua;
+    right: 50px;
+    top:70px;
+    z-index: 2;
+`;
+
 const Parent = styled.div`
     cursor: pointer;
     position: relative;
@@ -117,6 +143,7 @@ const NavBar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 `;
 
 const Category = styled.div`
