@@ -49,7 +49,7 @@ export default function App() {
       return (
         <>
         <Navbar setCart = {()=>setShowCart(!showCart)} Sold = {itemsSold} addCurrency={handleCurrency} Categories={data.categories} Currencies={data.currencies} Toggler = {toggler}  Togg = {togg}/>
-        {showCart ? <Cart /> :( show ? <ProDescri Currency = {currency} Data = {descri[0]} Addd = {handleAdd} /> : <ProductList Dataa={data} Currency = {currency} Sold = {itemsSold} Handle = {() => handleShow}  Data={togg ? data.categories[0] : data.categories[1]}/>)}
+        {showCart ? <Cart Curr={currency} Sold = {itemsSold} /> :( show ? <ProDescri Currency = {currency} Data = {descri[0]} Addd = {handleAdd} /> : <ProductList Dataa={data} Currency = {currency} Sold = {itemsSold} Handle = {() => handleShow}  Data={togg ? data.categories[0] : data.categories[1]}/>)}
         </>
       )
     }

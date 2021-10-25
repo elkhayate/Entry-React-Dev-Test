@@ -1,11 +1,20 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-
+import CartItem from "./cartItem";
 export default class Cart extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+             
+        }
+    }
+    
     render() {
         return(
             <Container>
                 <Title>cart</Title>
+                {this.props.Sold.map(p => <CartItem key={p[0].id} Curr={this.props.Curr} title = {p[0].name} price={p[0].prices} attr = {p[1]} image = {p[0].gallery} />)}
             </Container>
         )
     }
