@@ -5,8 +5,14 @@ import vector from "../assets/Vector.png";
 import vector2 from "../assets/Vector-2.png";
 
 export default class Navbar extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+        }
+    }
     render() {
-        const Style = {color : "#5ECE7B", borderBottom : "2px #5ECE7B solid"};    
+        const Style = {color : "#5ECE7B", borderBottom : "2px #5ECE7B solid"};   
         return(
             <NavBar>
                 <Container>
@@ -25,6 +31,9 @@ export default class Navbar extends Component {
                         <img style={{cursor : "pointer"}}  src={vector} alt="Purchases" />
                     </Icons>
                 </Container>
+                <ul>
+                    {this.props.Currencies.map(t => <li key={t} onClick={()=> this.props.addCurrency(t)}>{t}</li>)}
+                </ul>
             </NavBar>
         )
     }

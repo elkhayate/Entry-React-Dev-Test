@@ -3,15 +3,23 @@ import styled from "styled-components";
 import sold from "../assets/Sold_icon.png"
 export default class Product extends Component {
 
+    handleCurrency = (item) => {
+        if(item) {
+            var newItem = this.props.price.filter(p => p.currency === item);
+            return `${newItem[0].amount} ${newItem[0].currency}`
+        }else {
+            return `${this.props.price[0].amount} ${this.props.price[0].currency}`
+        }
+    }
     render(){
         return(
-            <Container onClick={() => this.props.Handle(this.props.id)} style={{opacity : this.props.stock ? "" : "0.5"}}>
+            <Container onClick={() => this.props.Handle(this.props.id)} style={{opacity : this.props.stock ? "" : "0.5", boxShadow : this.props.sold ? "0px 4px 35px rgba(168, 172, 176, 0.19)" : ""}}>
                 {this.props.stock ? null : <Stock>out of stock</Stock>}
                 {this.props.sold && <Sold src={sold} alt = "Sold item" />}
                 <Image src={this.props.src} alt = "Product"  />
                 <Content>
                     <Title>{this.props.title}</Title>
-                    <Price>{`${this.props.price} ${this.props.currency}`}</Price>
+                    <Price>{this.handleCurrency(this.props.Curr)}</Price>
                 </Content>
             </Container>
         )

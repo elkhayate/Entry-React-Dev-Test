@@ -37,6 +37,16 @@ export default class ProDescri extends Component {
             image : val
         })
     }
+    handleCurrency = (item) => {
+        const Item = this.props.Data;
+        if(item){
+            var newItem = this.props.Data.prices.filter(p => p.currency === item);
+            console.log(newItem)
+            return `${newItem[0].amount} ${newItem[0].currency}`
+        }else {
+            return `${Item.prices[0].amount} ${Item.prices[0].currency}`
+        } 
+    }
     render(){
         const item = this.props.Data;
         const Gall = item.gallery;
@@ -64,7 +74,7 @@ export default class ProDescri extends Component {
                 }
                     <Price>
                         <h2>Price :</h2>
-                        <h2>{`${item.prices[0].amount} ${item.prices[0].currency}`}</h2>
+                        <h2>{this.handleCurrency(this.props.Currency)}</h2>
                     </Price> 
                     <Button style={{opacity : item.inStock ? "" : "0.2"}} disabled={!item.inStock} onClick={() => this.handleButton()}>add to cart</Button>
                     <Descri  dangerouslySetInnerHTML={{__html: item.description}} />

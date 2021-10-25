@@ -3,13 +3,13 @@ import Product from './Product';
 import styled from "styled-components";
 
 export default class ProductList extends Component {
- 
+
     render() {
         return(
             <div style={{paddingTop : "40px"}}>
                 <Title>{this.props.Data.name}</Title>
                     <Container>
-                        {this.props.Data.products.map(p =>  <Product Handle = {this.props.Handle(p.id)} stock = {p.inStock}  id = {p.id} key = {p.id} title = {p.name} src = {p.gallery[0]} price = {p.prices[0].amount} currency = {p.prices[0].currency}/>)}
+                        {this.props.Data.products.map(p =>  <Product sold={this.props.Sold.some(t => t[0] === p)} Handle = {this.props.Handle(p.id)} stock = {p.inStock}  id = {p.id} key = {p.id} title = {p.name} src = {p.gallery[0]} Curr = {this.props.Currency} price = {p.prices}/>)}
                     </Container>
             </div>
         )
