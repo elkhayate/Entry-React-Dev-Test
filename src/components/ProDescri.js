@@ -57,7 +57,7 @@ export default class ProDescri extends Component {
                      <Attributes key={attri.id}>
                          <h2>{attri.name} :</h2>
                          <Choicees>
-                             {attri.items.map(i => attri.type === "swatch" ? <Choice style={{opacity : this.state.swatch === i.value ? "0.6" : "", background : i.value}} key={i.id}  onClick={()=>{this.handleClick(attri, i.value)}} /> : <Choice style={{opacity : this.state.Test === i.value ? "0.2" : ""}} key={i.id} onClick={()=>{this.handleClick(attri, i.value)}}>{i.value}</Choice>)}
+                             {attri.items.map(i => attri.type === "swatch" ? <Choice style={{opacity : this.state.choicesList.some(t => t.Val === i.value && t.name === attri.id) ? "0.2" : "", background : i.value}} key={i.id}  onClick={()=>{this.handleClick(attri, i.value)}} /> : <Choice style={{opacity : this.state.choicesList.some(t => t.Val === i.value && t.name === attri.id) ? "0.2" : ""}} key={i.id} onClick={()=>{this.handleClick(attri, i.value)}}>{i.value}</Choice>)}
                          </Choicees>
                      </Attributes>
                      )
