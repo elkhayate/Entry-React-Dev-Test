@@ -8,16 +8,28 @@ export default class ProDescri extends Component {
         super(props)
     
         this.state = {
-            image : this.props.Data.gallery[0]
+            image : this.props.Data.gallery[0],
+            Data : this.props.Data,
+            choicesList : [],
         }
     }
-    handleClick = (data) => {
-        this.setState({
-            value : data
-        });
+    handleClick = (attr, val) => {
+        let newItem = {name : attr.id, Val : val};
+        if (this.state.choicesList.some(t => t.name === attr.id && t.Val === val)){
+            this.setState({choicesList : [...this.state.choicesList.filter(t => t.name !== attr.id && t.Val !== val), newItem]})
+        }else if (this.state.choicesList.some(t => t.name === attr.id && t.Val !== val)){
+            this.setState({choicesList : [...this.state.choicesList.filter(t => t.name !== attr.id), newItem]})
+        }else {
+            this.setState({
+                choicesList : [...this.state.choicesList, newItem]
+            })
+        }
+        
+
     }
     handleButton = () => {
-        this.props.Add()
+        const Item = [this.state.swatch, this.state.Test];
+        this.props.Add(Item)
     }
     switchImage = (val) => {
         this.setState({
@@ -26,7 +38,7 @@ export default class ProDescri extends Component {
     }
     render(){
         const item = this.props.Data;
-        const Gall = item.gallery
+        const Gall = item.gallery;
         return (
             <Container>
                <Images>
@@ -39,14 +51,18 @@ export default class ProDescri extends Component {
                    <Title>
                         {item.name}
                    </Title>
-                   {item.attributes[0] && 
-                   <Attributes>
-                   <h2>{item.attributes[0].name} :</h2>
-                   <Choicees>
-                       {item.attributes[0].items.map(i => item.attributes[0].type === "swatch" ? <Choice style={{opacity : this.state.value === i.value ? "0.6" : "", background : i.value}} key={i.id}  onClick={()=>{this.handleClick(i.value)}} /> : <Choice style={{opacity : this.state.value === i.value ? "0.2" : ""}} key={i.id} onClick={()=>{this.handleClick(i.value)}}>{i.value}</Choice>)}
-                   </Choicees>
-                </Attributes>  
-                   } 
+                 {item.attributes && 
+                   
+                    item.attributes.map(attri => 
+                     <Attributes key={attri.id}>
+                         <h2>{attri.name} :</h2>
+                         <Choicees>
+                             {attri.items.map(i => attri.type === "swatch" ? <Choice style={{opacity : this.state.swatch === i.value ? "0.6" : "", background : i.value}} key={i.id}  onClick={()=>{this.handleClick(attri, i.value)}} /> : <Choice style={{opacity : this.state.Test === i.value ? "0.2" : ""}} key={i.id} onClick={()=>{this.handleClick(attri, i.value)}}>{i.value}</Choice>)}
+                         </Choicees>
+                     </Attributes>
+                     )
+                }
+                 
                     <Price>
                         <h2>Price :</h2>
                         <h2>{`${item.prices[0].amount} ${item.prices[0].currency}`}</h2>
@@ -119,12 +135,12 @@ const Container = styled.div`
     margin: auto;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding: 20px;
 `;
 const Images = styled.div`
     display: flex;
-    width: 60%;
+    width: 50%;
     align-self: flex-start;
 `;
 const Choices = styled.div`

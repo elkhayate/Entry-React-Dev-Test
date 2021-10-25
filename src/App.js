@@ -3,6 +3,8 @@ import Navbar from './components/Navbar'
 import { DataContext } from './contexts/DataContext';
 import ProductList from './components/ProductList';
 import ProDescri from './components/ProDescri';
+
+
 export default function App() {
   const {infos, loading, error} = useContext(DataContext);
   const [data, setData] = useState();
@@ -25,9 +27,10 @@ export default function App() {
     setDescri(item)
     setShow(true)
   }
-  const handleAdd = () => {
+  const handleAdd = (item) => {
     if(!itemsSold.includes(descri[0])){
-      setItemsSold(old=> [...old, descri[0]])
+      var Item = [descri[0],item]
+      setItemsSold(old=> [...old, Item])
     }else{
       return null
     }
