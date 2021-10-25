@@ -13,7 +13,7 @@ export default class Product extends Component {
     }
     render(){
         return(
-            <Container onClick={() => this.props.Handle(this.props.id)} style={{opacity : this.props.stock ? "" : "0.5", boxShadow : this.props.sold ? "0px 4px 35px rgba(168, 172, 176, 0.19)" : ""}}>
+            <Container onClick={() => this.props.Handle(this.props.id)} style={{opacity : this.props.stock ? "" : "0.7", boxShadow : this.props.sold ? "0px 4px 35px rgba(168, 172, 176, 0.19)" : ""}}>
                 {this.props.stock ? null : <Stock>out of stock</Stock>}
                 {this.props.sold && <Sold src={sold} alt = "Sold item" />}
                 <Image src={this.props.src} alt = "Product"  />

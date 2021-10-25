@@ -3,7 +3,7 @@ import Navbar from './components/Navbar'
 import { DataContext } from './contexts/DataContext';
 import ProductList from './components/ProductList';
 import ProDescri from './components/ProDescri';
-
+import Cart from "./components/Cart";
 
 export default function App() {
   const {infos, loading, error} = useContext(DataContext);
@@ -13,6 +13,7 @@ export default function App() {
   const [descri, setDescri] = useState();
   const [itemsSold, setItemsSold] = useState([]);
   const [currency, setCurrency] = useState();
+  const [showCart , setShowCart] = useState(false);
   useEffect(()=>{
     setData(infos)
   },[loading, infos, togg])
@@ -20,6 +21,7 @@ export default function App() {
   const toggler = (val) => {
     setTogg(val)
     setShow(false)
+    setShowCart(false)
   }
   const handleCurrency = (item) => {
     setCurrency(item)
@@ -46,8 +48,8 @@ export default function App() {
     if(data){
       return (
         <>
-        <Navbar Sold = {itemsSold} addCurrency={handleCurrency} Categories={data.categories} Currencies={data.currencies} Toggler = {toggler}  Togg = {togg}/>
-        {show ? <ProDescri Currency = {currency} Data = {descri[0]} Addd = {handleAdd} /> : <ProductList Dataa={data} Currency = {currency} Sold = {itemsSold} Handle = {() => handleShow}  Data={togg ? data.categories[0] : data.categories[1]}/>}
+        <Navbar setCart = {()=>setShowCart(!showCart)} Sold = {itemsSold} addCurrency={handleCurrency} Categories={data.categories} Currencies={data.currencies} Toggler = {toggler}  Togg = {togg}/>
+        {showCart ? <Cart /> :( show ? <ProDescri Currency = {currency} Data = {descri[0]} Addd = {handleAdd} /> : <ProductList Dataa={data} Currency = {currency} Sold = {itemsSold} Handle = {() => handleShow}  Data={togg ? data.categories[0] : data.categories[1]}/>)}
         </>
       )
     }

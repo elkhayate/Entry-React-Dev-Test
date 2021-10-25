@@ -23,7 +23,7 @@ export default class Navbar extends Component {
                         <Category style={this.props.Togg ? null : Style} onClick={()=> this.props.Toggler(false)}><Title>{this.props.Categories[1].name}</Title></Category>
                     </Categories>
                     <CartBtn>
-                        <img src = {Brand} alt = "Brand Icon"/>
+                        <img onClick={this.props.setCart} src = {Brand} alt = "Brand Icon"/>
                     </CartBtn>
                     <Icons>
                         <Currencies onClick={()=>{this.setState({showCurrencies : !this.state.showCurrencies})}}>
