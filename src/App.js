@@ -46,7 +46,7 @@ export default function App() {
     if(data){
       return (
         <>
-        <Navbar addCurrency={handleCurrency} Categories={data.categories} Currencies={data.currencies} Toggler = {toggler}  Togg = {togg}/>
+        <Navbar Sold = {itemsSold} addCurrency={handleCurrency} Categories={data.categories} Currencies={data.currencies} Toggler = {toggler}  Togg = {togg}/>
         {show ? <ProDescri Currency = {currency} Data = {descri[0]} Addd = {handleAdd} /> : <ProductList Dataa={data} Currency = {currency} Sold = {itemsSold} Handle = {() => handleShow}  Data={togg ? data.categories[0] : data.categories[1]}/>}
         </>
       )

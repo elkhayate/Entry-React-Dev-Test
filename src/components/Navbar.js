@@ -9,11 +9,12 @@ export default class Navbar extends Component {
         super(props)
     
         this.state = {
-            showCurrencies : false
+            showCurrencies : false,
+            showCart : false,
         }
     }
     render() {
-        const Style = {color : "#5ECE7B", borderBottom : "2px #5ECE7B solid"};   
+        const Style = {color : "#5ECE7B", borderBottom : "2px #5ECE7B solid"};  
         return(
             <NavBar>
                 <Container>
@@ -29,7 +30,10 @@ export default class Navbar extends Component {
                                 <Usd>$</Usd>
                                 <img style={{height:"100%"}} src={vector2} alt = "DropDown" />
                         </Currencies>
-                        <img style={{cursor : "pointer"}}  src={vector} alt="Purchases" />
+                        <Parent >
+                            {this.props.Sold[0] && <Test>{this.props.Sold.length}</Test>}
+                        <img  src={vector} alt="Purchases" />
+                        </Parent>
                     </Icons>
                 </Container>
                 {this.state.showCurrencies &&
@@ -41,6 +45,27 @@ export default class Navbar extends Component {
         )
     }
 }
+const Parent = styled.div`
+    cursor: pointer;
+    position: relative;
+`;
+const Test = styled.div`
+    position: absolute;
+    right: -10px;
+    top: -7px;
+    width: 17px;
+    height: 17px;
+    background-color: black;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    border-radius: 60px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+`;
+
 const Choice = styled.li`
     list-style: none;
     width: 100%;
