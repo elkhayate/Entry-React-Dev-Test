@@ -9,6 +9,7 @@ export default class Navbar extends Component {
         super(props)
     
         this.state = {
+            showCurrencies : false
         }
     }
     render() {
@@ -24,21 +25,43 @@ export default class Navbar extends Component {
                         <img src = {Brand} alt = "Brand Icon"/>
                     </CartBtn>
                     <Icons>
-                        <Currencies>
+                        <Currencies onClick={()=>{this.setState({showCurrencies : !this.state.showCurrencies})}}>
                                 <Usd>$</Usd>
                                 <img style={{height:"100%"}} src={vector2} alt = "DropDown" />
                         </Currencies>
                         <img style={{cursor : "pointer"}}  src={vector} alt="Purchases" />
                     </Icons>
                 </Container>
-                <ul>
-                    {this.props.Currencies.map(t => <li key={t} onClick={()=> this.props.addCurrency(t)}>{t}</li>)}
-                </ul>
+                {this.state.showCurrencies &&
+                <Choices>
+                    {this.props.Currencies.map(t => <Choice key={t} onClick={()=> {this.props.addCurrency(t); this.setState({showCurrencies : false})}}>{t}</Choice>)}
+                </Choices>
+                }
             </NavBar>
         )
     }
 }
+const Choice = styled.li`
+    list-style: none;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+`;
 
+const Choices = styled.ul`
+    filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
+    width: 114px;
+    position: absolute;
+    top:50px;
+    right: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    border-radius: 5px;
+`;
 const Title = styled.h1`
     font-weight: normal;
     font-size: 16px;

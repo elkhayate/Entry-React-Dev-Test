@@ -76,7 +76,7 @@ export default class ProDescri extends Component {
                         <h2>Price :</h2>
                         <h2>{this.handleCurrency(this.props.Currency)}</h2>
                     </Price> 
-                    <Button style={{opacity : item.inStock ? "" : "0.2"}} disabled={!item.inStock} onClick={() => this.handleButton()}>add to cart</Button>
+                    <Button style={{opacity : item.inStock ? "" : "0.2", cursor: item.inStock ? "" : "not-allowed"}} disabled={!item.inStock} onClick={() => this.handleButton()}>add to cart</Button>
                     <Descri  dangerouslySetInnerHTML={{__html: item.description}} />
                  
                             
