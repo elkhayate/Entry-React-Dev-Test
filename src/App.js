@@ -14,10 +14,18 @@ export default function App() {
   const [itemsSold, setItemsSold] = useState([]);
   const [currency, setCurrency] = useState();
   const [showCart , setShowCart] = useState(false);
+  const [drop, setDrop] = useState(false);
+  const [Total, setTotal] = useState([])
   useEffect(()=>{
     setData(infos)
   },[loading, infos, togg])
-  
+
+
+  const handleTotal = (item) => {
+    console.log("tranit")
+    setTotal(old => [...old , item])
+    console.log(item)
+  }
   const toggler = (val) => {
     setTogg(val)
     setShow(false)
@@ -48,8 +56,10 @@ export default function App() {
     if(data){
       return (
         <>
-        <Navbar setCart = {()=>setShowCart(!showCart)} Sold = {itemsSold} addCurrency={handleCurrency} Categories={data.categories} Currencies={data.currencies} Toggler = {toggler}  Togg = {togg}/>
-        {showCart ? <Cart Curr={currency} Sold = {itemsSold} /> :( show ? <ProDescri Currency = {currency} Data = {descri[0]} Addd = {handleAdd} /> : <ProductList Dataa={data} Currency = {currency} Sold = {itemsSold} Handle = {() => handleShow}  Data={togg ? data.categories[0] : data.categories[1]}/>)}
+        <Navbar HandleTotal={() => handleTotal}  Show = {drop} setShow={()=>setDrop(!drop)} setCart = {()=>setShowCart(!showCart)} Curr={currency} Sold = {itemsSold} addCurrency={handleCurrency} Categories={data.categories} Currencies={data.currencies} Toggler = {toggler}  Togg = {togg}/>
+        <div style={{opacity : drop ? "0.2" : "", background : drop ? "rgba(57, 55, 72, 0.22)" : "", height:"100vh"}}>
+        {showCart ? <Cart Curr={currency} Sold = {itemsSold} /> :( show ? <ProDescri  HandleTotal={handleTotal}  Currency = {currency} Data = {descri[0]} Addd = {handleAdd} /> : <ProductList Dataa={data} Currency = {currency} Sold = {itemsSold} Handle = {() => handleShow}  Data={togg ? data.categories[0] : data.categories[1]}/>)}
+        </div>
         </>
       )
     }

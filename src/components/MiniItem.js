@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 
-
-export default class CartItem extends Component {
+export default class MiniItem extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
              count : 1,
-             Count : 0
+             Count : 0,
         }
+        this.handleCurrency = this.handleCurrency.bind(this);
     }
     handleCurrency = (item) => {
         if(item) {
             var newItem = this.props.price.filter(p => p.currency === item);
+            this.props.HandleTotal(newItem[0].amount)
             return `${newItem[0].amount} ${newItem[0].currency}`
         }else {
             return `${this.props.price[0].amount} ${this.props.price[0].currency}`
@@ -85,7 +86,7 @@ const Scrolll = styled.p`
 
 const Details = styled.div`
     display: flex;
-    width: 20%;
+    width: 45%;
 `;
 const Container = styled.div`
     display: flex;
@@ -95,26 +96,26 @@ const Container = styled.div`
     border-top: 1px solid #1D1F22;
 `;
 const Image = styled.img`
-    height: 150px;
-    width: 150px;
+    height: 100px;
+    width: 100px;
 `;
 const Clicker = styled.div`
-    width: 45px;
-    height: 45px;
+    width: 24px;
+    height: 24px;
     border: 1px solid #1D1F22;
     box-sizing: border-box;
     cursor: pointer;
     display: flex;
     align-content: center;
     justify-content: center;
-    font-size: 35px;
+   font-size: 20px;
 `;
 
 const Choice = styled.div`
     border: 1px solid #A6A6A6;
     box-sizing: border-box;
-    width: 63px;
-    height: 45px;
+    width: 24px;
+    height: 24px;
     font-weight: normal;
     font-size: 16px;
     line-height: 18px;
@@ -139,15 +140,15 @@ const Counter = styled.div`
     align-items: center;
 `;
 const Title = styled.div`
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 27px;
+   font-weight: 300;
+    font-size: 16px;
+    line-height: 160%;
     color: #1D1F22;
 `;
 const Price = styled.div`
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 18px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 160%;
 `;
 const Attributes = styled.div``;
 
@@ -164,4 +165,3 @@ const Content = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
 `;
-

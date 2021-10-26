@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Brand from "../assets/Brand.png";
 import vector from "../assets/Vector.png";
 import vector2 from "../assets/Vector-2.png";
-import CartItem from "./cartItem";
+import MiniItem from './MiniItem';
 
 export default class Navbar extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ export default class Navbar extends Component {
     
         this.state = {
             showCurrencies : false,
-            showCart : true,
+            showCart : false,
         }
     }
     render() {
@@ -31,7 +31,7 @@ export default class Navbar extends Component {
                                 <Usd>$</Usd>
                                 <img style={{height:"100%"}} src={vector2} alt = "DropDown" />
                         </Currencies>
-                        <Parent onClick={()=>this.setState({showCart : !this.state.showCart})}>
+                        <Parent onClick={()=> this.props.setShow()}>
                             {this.props.Sold[0] && <Test>{this.props.Sold.length}</Test>}
                         <img  src={vector} alt="Purchases" />
                         </Parent>
@@ -42,16 +42,63 @@ export default class Navbar extends Component {
                     {this.props.Currencies.map(t => <Choice key={t} onClick={()=> {this.props.addCurrency(t); this.setState({showCurrencies : false})}}>{t}</Choice>)}
                 </Choices>
                 }
-                {this.state.showCart &&
+                {this.props.Show &&
                     <DropDown>
                         <Titl>My Bag. {this.props.Sold.length} items</Titl>
-                        {this.props.Sold.map(p => <CartItem key={p[0].id} Curr={this.props.Curr} title = {p[0].name} price={p[0].prices} attr = {p[1]} image = {p[0].gallery} />)}
+                        {this.props.Sold.map(p => <MiniItem HandleTotal = {()=>this.props.HandleTotal()} key={p[0].id} Curr={this.props.Curr} title = {p[0].name} price={p[0].prices} attr = {p[1]} image = {p[0].gallery} />)}
+                        <Total>
+                            <Titre>total</Titre>
+                            <Price>100$</Price>
+                        </Total>
+                        <Buttons>
+                            <Button style={{color : "#1D1F22", background : "#FFFFFF", border:"1px solid #1D1F22"}}>view bag</Button>
+                            <Button style={{color : "#FFFFFF", background : "#5ECE7B", border:"none"}}>check out</Button>
+                        </Buttons>
                     </DropDown>
                 }
             </NavBar>
         )
     }
 }
+const Price = styled.h2`
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+`;
+const Titre = styled.h2`
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+    text-transform: capitalize;
+`;
+const Button = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 32px;
+    width: 145px;
+    height: 43px;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 120%;
+    text-transform: uppercase;
+`;
+const Buttons = styled.div`
+    width: 95%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+`;
+
+const Total = styled.div`
+    width: 95%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
 const Titl = styled.h2`
     font-weight: bold;
     font-size: 16px;
@@ -65,10 +112,10 @@ const Titl = styled.h2`
 const DropDown = styled.div`
     position: absolute;
     width : 325px;
-    background-color: aqua;
     right: 50px;
-    top:70px;
+    top: 97px;
     z-index: 2;
+    background: #FFFFFF;
 `;
 
 const Parent = styled.div`

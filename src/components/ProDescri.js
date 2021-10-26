@@ -11,6 +11,8 @@ export default class ProDescri extends Component {
             image : this.props.Data.gallery[0],
             Data : this.props.Data,
             choicesList : [],
+            Total: 0
+            
         }
         this.handleButton = this.handleButton.bind(this)
     }
@@ -28,9 +30,13 @@ export default class ProDescri extends Component {
         return null
 
     }
-    handleButton = () => {
+    handleButton = (item) => {
+        var newItem = this.props.Data.prices.filter(p => p.currency === item);
+        this.setState({Total : this.state.Total + newItem.amount});
         this.props.Addd(this.state.choicesList)
         this.setState({choicesList : []})
+        this.props.HandleTotal(this.state.Total)
+        console.log(newItem)
     }
     switchImage = (val) => {
         this.setState({
@@ -41,8 +47,7 @@ export default class ProDescri extends Component {
         const Item = this.props.Data;
         if(item){
             var newItem = this.props.Data.prices.filter(p => p.currency === item);
-            console.log(newItem)
-            return `${newItem[0].amount} ${newItem[0].currency}`
+            return `${newItem[0].amount} ${newItem[0].currency}` 
         }else {
             return `${Item.prices[0].amount} ${Item.prices[0].currency}`
         } 
@@ -54,7 +59,7 @@ export default class ProDescri extends Component {
             <Container>
                <Images>
                     <Choices>
-                        {Gall.map(i => <img onClick={() => this.switchImage(i)} key={i} style={{height:"100px", cursor : "pointer"}} src={i} alt ="product" />)}
+                        {Gall.map(i => <img onClick={() => this.switchImage(i)} key={i} style={{height:"80px", cursor : "pointer", width:"80px"}} src={i} alt ="product" />)}
                     </Choices>
                     <Image src={this.state.image} />
                </Images>
@@ -76,7 +81,7 @@ export default class ProDescri extends Component {
                         <h2>Price :</h2>
                         <h2>{this.handleCurrency(this.props.Currency)}</h2>
                     </Price> 
-                    <Button style={{opacity : item.inStock ? "" : "0.2", cursor: item.inStock ? "" : "not-allowed"}} disabled={!item.inStock} onClick={() => this.handleButton()}>add to cart</Button>
+                    <Button style={{opacity : item.inStock ? "" : "0.2", cursor: item.inStock ? "" : "not-allowed"}} disabled={!item.inStock} onClick={() => this.handleButton(this.props.Currency)}>add to cart</Button>
                     <Descri  dangerouslySetInnerHTML={{__html: item.description}} />
                </Content>
             </Container>
@@ -149,10 +154,14 @@ const Choices = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
 `;
 const Image = styled.img`
-    width: 610px;
-    height: 511px;
+    padding: 10px;
+    margin-left: 30px;
+    height: 100%;
+    width: 100%;
+
 `;
 const Content = styled.div`
     width : 40%;
