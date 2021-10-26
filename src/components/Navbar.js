@@ -45,10 +45,12 @@ export default class Navbar extends Component {
                 {this.props.Show &&
                     <DropDown>
                         <Titl>My Bag. {this.props.Sold.length} items</Titl>
+                        <div style={{height:"350px", overflow:"scroll"}}>
                         {this.props.Sold.map(p => <MiniItem  key={p[0].id} Curr={this.props.Curr} title = {p[0].name} price={p[0].prices} attr = {p[1]} image = {p[0].gallery} />)}
+                        </div>
                         <Total>
                             <Titre>total</Titre>
-                            <Price>{this.props.HandleSum()}</Price>
+                            <Price>{`${this.props.HandleSum()} ${this.props.Curr}`}</Price>
                         </Total>
                         <Buttons>
                             <Button  onClick={()=>{this.props.setCartt(); this.props.setShow(); }} style={{color : "#1D1F22", background : "#FFFFFF", border:"1px solid #1D1F22"}}>view bag</Button>
