@@ -11,12 +11,13 @@ export default class ProDescri extends Component {
             image : this.props.Data.gallery[0],
             Data : this.props.Data,
             choicesList : [],
-            Total: 0
             
         }
-        this.handleButton = this.handleButton.bind(this)
+        this.handleButton = this.handleButton.bind(this);
     }
+
     handleClick = (attr, val) => {
+        
         let newItem = {name : attr.id, Val : val};
         if (this.state.choicesList.some(t => t.name === attr.id && t.Val === val)){
             this.setState({choicesList : [...this.state.choicesList.filter(t => t.name !== attr.id && t.Val !== val), newItem]})
@@ -27,16 +28,18 @@ export default class ProDescri extends Component {
                 choicesList : [...this.state.choicesList, newItem]
             })
         }
+        
         return null
 
     }
-    handleButton = (item) => {
-        var newItem = this.props.Data.prices.filter(p => p.currency === item);
-        this.setState({Total : this.state.Total + newItem.amount});
+    handleButton = () => {
+        var newItemm = this.props.Data.prices.filter(p => p.currency === this.props.Currency);
+        console.log(newItemm)
+        this.props.HandleTotal(newItemm[0].amount)
         this.props.Addd(this.state.choicesList)
         this.setState({choicesList : []})
-        this.props.HandleTotal(this.state.Total)
-        console.log(newItem)
+        
+        
     }
     switchImage = (val) => {
         this.setState({
@@ -55,6 +58,7 @@ export default class ProDescri extends Component {
     render(){
         const item = this.props.Data;
         const Gall = item.gallery;
+        
         return (
             <Container>
                <Images>
@@ -81,7 +85,7 @@ export default class ProDescri extends Component {
                         <h2>Price :</h2>
                         <h2>{this.handleCurrency(this.props.Currency)}</h2>
                     </Price> 
-                    <Button style={{opacity : item.inStock ? "" : "0.2", cursor: item.inStock ? "" : "not-allowed"}} disabled={!item.inStock} onClick={() => this.handleButton(this.props.Currency)}>add to cart</Button>
+                    <Button style={{opacity : item.inStock ? "" : "0.2", cursor: item.inStock ? "" : "not-allowed"}} disabled={!item.inStock} onClick={() => this.handleButton()}>add to cart</Button>
                     <Descri  dangerouslySetInnerHTML={{__html: item.description}} />
                </Content>
             </Container>

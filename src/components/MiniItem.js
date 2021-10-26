@@ -14,7 +14,6 @@ export default class MiniItem extends Component {
     handleCurrency = (item) => {
         if(item) {
             var newItem = this.props.price.filter(p => p.currency === item);
-            this.props.HandleTotal(newItem[0].amount)
             return `${newItem[0].amount} ${newItem[0].currency}`
         }else {
             return `${this.props.price[0].amount} ${this.props.price[0].currency}`
@@ -117,7 +116,7 @@ const Choice = styled.div`
     width: 24px;
     height: 24px;
     font-weight: normal;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 18px;
     display: flex;
     justify-content: center;

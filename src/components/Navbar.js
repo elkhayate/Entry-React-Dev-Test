@@ -24,7 +24,7 @@ export default class Navbar extends Component {
                         <Category style={this.props.Togg ? null : Style} onClick={()=> this.props.Toggler(false)}><Title>{this.props.Categories[1].name}</Title></Category>
                     </Categories>
                     <CartBtn>
-                        <img onClick={this.props.setCart} src = {Brand} alt = "Brand Icon"/>
+                        <img src = {Brand} alt = "Brand Icon"/>
                     </CartBtn>
                     <Icons>
                         <Currencies onClick={()=>{this.setState({showCurrencies : !this.state.showCurrencies})}}>
@@ -45,13 +45,13 @@ export default class Navbar extends Component {
                 {this.props.Show &&
                     <DropDown>
                         <Titl>My Bag. {this.props.Sold.length} items</Titl>
-                        {this.props.Sold.map(p => <MiniItem HandleTotal = {()=>this.props.HandleTotal()} key={p[0].id} Curr={this.props.Curr} title = {p[0].name} price={p[0].prices} attr = {p[1]} image = {p[0].gallery} />)}
+                        {this.props.Sold.map(p => <MiniItem  key={p[0].id} Curr={this.props.Curr} title = {p[0].name} price={p[0].prices} attr = {p[1]} image = {p[0].gallery} />)}
                         <Total>
                             <Titre>total</Titre>
-                            <Price>100$</Price>
+                            <Price>{this.props.HandleSum()}</Price>
                         </Total>
                         <Buttons>
-                            <Button style={{color : "#1D1F22", background : "#FFFFFF", border:"1px solid #1D1F22"}}>view bag</Button>
+                            <Button  onClick={()=>{this.props.setCartt(); this.props.setShow(); }} style={{color : "#1D1F22", background : "#FFFFFF", border:"1px solid #1D1F22"}}>view bag</Button>
                             <Button style={{color : "#FFFFFF", background : "#5ECE7B", border:"none"}}>check out</Button>
                         </Buttons>
                     </DropDown>
@@ -72,6 +72,7 @@ const Titre = styled.h2`
     text-transform: capitalize;
 `;
 const Button = styled.button`
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
